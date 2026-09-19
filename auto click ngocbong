@@ -1,0 +1,56 @@
+(async function autoClickSequence() {
+    // Hàm hỗ trợ tạm dừng (chờ nút tiếp theo xuất hiện hoặc load xong)
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Hàm chờ và lấy phần tử xuất hiện trong DOM
+    async function waitForElement(selector, timeout = 10000) {
+        const start = Date.now();
+        while (Date.now() - start < timeout) {
+            const el = document.querySelector(selector);
+            if (el && el.offsetParent !== null) { // Kiểm tra phần tử hiển thị thực tế
+                return el;
+            }
+            await delay(500);
+        }
+        return null;
+    }
+
+    console.log("🚀 Bắt đầu tiến trình tự động click...");
+
+    // --- Bước 1: Nút "BẮT ĐẦU VƯỢT LINK" ---
+    const step1Btn = await waitForElement('button.btn-custom.btn-free');
+    if (step1Btn) {
+        step1Btn.click();
+        console.log("✅ Đã bấm Nút 1: BẮT ĐẦU VƯỢT LINK");
+    } else {
+        console.error("❌ Không tìm thấy Nút 1");
+        return;
+    }
+
+    // Chờ 2 giây sau khi bấm nút 1
+    await delay(2000);
+
+    // --- Bước 2: Nút "Xác minh" (Ảnh) ---
+    const step2Img = await waitForElement('img[alt="Xác minh"][src="/lock.png"]');
+    if (step2Img) {
+        step2Img.click();
+        console.log("✅ Đã bấm Nút 2: Xác minh (lock.png)");
+    } else {
+        console.error("❌ Không tìm thấy Nút 2");
+        return;
+    }
+
+    // Chờ đúng 6 giây trước khi thực hiện bấm Nút 3
+    console.log("⏳ Đang chờ 6 giây để đếm ngược/xử lý...");
+    await delay(6000);
+
+    // --- Bước 3: Nút "TIẾP TỤC →" ---
+    const step3Btn = await waitForElement('button.btn-custom.btn-free.btn-continue');
+    if (step3Btn) {
+        step3Btn.click();
+        console.log("✅ Đã bấm Nút 3: TIẾP TỤC →");
+        console.log("🎉 Hoàn tất tiến trình!");
+    } else {
+        console.error("❌ Không tìm thấy Nút 3");
+    }
+})();
