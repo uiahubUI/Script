@@ -1,4 +1,4 @@
-##STORE_APPS = [
+STORE_APPS = [
     {
         "id": "may_tinh",
         "name": "May tinh",
