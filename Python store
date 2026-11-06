@@ -67,6 +67,7 @@ except KeyboardInterrupt:
         "description": "Spam tin nhan bang sdt khi ghet ai do",
         "size": "1.8 MB",
         "source": """
+spasms = "https://raw.githubusercontent.com/uiahubUI/Script/refs/heads/main/spsms.py"
 """,
     },
 #-------------------------------------------------------------------------------------------------------------
