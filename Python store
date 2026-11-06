@@ -1,0 +1,57 @@
+STORE_APPS = [
+    {
+        "id": "may_tinh",
+        "name": "May tinh",
+        "category": "Cong cu",
+        "description": "Cong cu tinh toan co ban",
+        "size": "0.1 MB",
+        "maintenance": True,
+        "source": """first = float(input("So thu nhat: "))
+operation = input("Phep tinh (+, -, *, /): ")
+second = float(input("So thu hai: "))
+if operation == "+":
+    result = first + second
+elif operation == "-":
+    result = first - second
+elif operation == "*":
+    result = first * second
+elif operation == "/":
+    result = first / second
+else:
+    raise ValueError("Phep tinh khong hop le")
+print("Ket qua:", result)
+""",
+    },
+    {
+        "id": "ghi_chu",
+        "name": "Ghi chu",
+        "category": "Tien ich",
+        "description": "Luu ghi chu ca nhan",
+        "size": "0.2 MB",
+        "source": """from pathlib import Path
+
+notes_path = Path.home() / "PYOS" / "notes.txt"
+notes_path.parent.mkdir(parents=True, exist_ok=True)
+note = input("Nhap ghi chu: ")
+with notes_path.open("a", encoding="utf-8") as notes_file:
+    notes_file.write(note + "\\n")
+print("Da luu ghi chu")
+""",
+    },
+    {
+        "id": "doan_so",
+        "name": "Doan so",
+        "category": "Tro choi",
+        "description": "Tro choi doan so don gian",
+        "size": "0.1 MB",
+        "source": """import random
+
+answer = random.randint(1, 10)
+guess = int(input("Doan mot so tu 1 den 10: "))
+if guess == answer:
+    print("Chinh xac!")
+else:
+    print("Chua dung. So dung la", answer)
+""",
+    },
+]
