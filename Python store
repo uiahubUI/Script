@@ -11,10 +11,10 @@ import threading
 import time
 
 print("Kich thuoc goi cua ban can dung: ")
-print("1. 1024 - Nhe")
-print("2. 2048 - Bth")
+print("1. 1024 - bth")
+print("2. 2048 - sieu lag")
 
-kt = int(input("Nhap lua chon kich thuoc cua ban: "))
+kt = int(input("Nhap lua chon kich thuoc cua ban o duoi desktop: "))
 
 if kt == 1:
     a = 1024
